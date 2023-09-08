@@ -49,6 +49,17 @@
             border-radius: 4px;
             cursor: pointer;
         }
+
+        button[type=reset] {
+            width: 100%;
+            background-color: #1a7889;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
         .left{
             float: left;
         }
@@ -136,6 +147,7 @@
                 </label>
                 <input type="number" name="Send_Limit" id="Send_Limit" value="2">
                 <button type="submit">Calculate</button>
+                <button type="reset">Reset</button>
                 <input type="text" id="display" readonly>
             </form>
         </div>
