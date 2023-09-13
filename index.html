@@ -83,6 +83,8 @@
                     <button type="submit" class="submitbtn">Calculate</button>
                     <button type="reset">Reset</button>
                     <input type="text" id="display" class="display" readonly>
+                    <h4 style="text-align: center;">Press "Enter" for Calculate.</h4>
+                    <h4 style="text-align: center;">Press "R" for Reset the Values.</h4>
                 </form>
             </div>
             <div class="right">
@@ -304,6 +306,19 @@
             let btn = document.querySelector('.submitbtn');
             btn.addEventListener('click', copyResultToClipboard);
         });
+        function executeFunctionOnRKeyPress() {
+            // Get a reference to the "display" input element
+            const displayInput = document.getElementById('display');
+            const limit = document.getElementById('Limit');
+            const Time = document.getElementById('Time');
+            const Send_Limit = document.getElementById('Send_Limit');
+
+            // Perform the desired action on the input element
+            displayInput.value = '';
+            limit.value = '';
+            Time.value = '15';
+            Send_Limit.value = '2';
+        }
     </script>
 </body>
 
