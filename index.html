@@ -80,9 +80,9 @@
                         Send Limit
                     </label>
                     <input type="number" name="Send_Limit" id="Send_Limit" value="2">
-                    <button type="submit">Calculate</button>
+                    <button type="submit" class="submitbtn">Calculate</button>
                     <button type="reset">Reset</button>
-                    <input type="text" id="display" readonly>
+                    <input type="text" id="display" class="display" readonly>
                 </form>
             </div>
             <div class="right">
@@ -282,21 +282,13 @@
             // Display the result in the "display" input field
             document.getElementById('display').value = Math.round(result);
 
-            // Create a temporary textarea element to copy the result to clipboard
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = displayField.value;
+            let btn=document.querySelector('.submitbtn')
+            btn.addEventListener("click",function() {
 
-            // Append the textarea element to the DOM
-            document.body.appendChild(tempTextArea);
-
-            // Select the content of the textarea
-            tempTextArea.select();
-
-            // Copy the selected text to the clipboard
+            let txt=document.querySelector('.display')
+            txt.select();
             document.execCommand('copy');
-
-            // Remove the temporary textarea element from the DOM
-            document.body.removeChild(tempTextArea);
+            })
         });
     </script>
 </body>
