@@ -78,6 +78,14 @@
                 }
             });
 
+            document.addEventListener('keydown', function (event) {
+            // Check if the "R" key was pressed (case-insensitive)
+            if (event.key.toLowerCase() === 'r') {
+                // Execute a function when "R" key is pressed
+                executeFunctionOnRKeyPress();
+            }
+            });
+
             // Function to copy the result to clipboard
             function copyResultToClipboard() {
                 let txt = document.querySelector('.display');
