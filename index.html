@@ -55,55 +55,61 @@
     <script>
         document.querySelector('form').addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent the form from actually submitting
-
+    
             // Get values from input fields
             const limit = parseFloat(document.getElementById('Limit').value);
             const time = parseFloat(document.getElementById('Time').value);
             const sendLimit = parseFloat(document.getElementById('Send_Limit').value);
-
+    
             // Calculate the result
-            const result = 3600 / ((limit / time) / sendLimit);
-
-            // Display the result in the "display" input field
-            document.getElementById('display').value = Math.round(result);
-
-            // Display the result in the "display" input field
-            const displayInput = document.getElementById('display');
-            displayInput.value = Math.round(result);
-
-            // Handle Enter key press to copy the result
-            displayInput.addEventListener('keyup', function (event) {
-                if (event.key === 'Enter') {
-                    copyResultToClipboard();
-                }
-            });
-
-            document.addEventListener('keydown', function (event) {
+            if (isNaN(limit)) {
+                // Display an error message in the "display" input field
+                const displayInput = document.getElementById('display');
+                displayInput.value = 'Please enter a value in Limit.';
+            } else {
+                // Calculate the result
+                const result = 3600 / ((limit / time) / sendLimit);
+    
+                // Display the result in the "display" input field
+                const displayInput = document.getElementById('display');
+                displayInput.value = Math.round(result);
+            }
+        });
+    
+        // Handle Enter key press to copy the result
+        document.getElementById('display').addEventListener('keyup', function (event) {
+            if (event.key === 'Enter') {
+                copyResultToClipboard();
+            }
+        });
+    
+        // Function to copy the result to clipboard
+        function copyResultToClipboard() {
+            let txt = document.querySelector('.display');
+            txt.select();
+            document.execCommand('copy');
+        }
+    
+        // Add a click event listener to the button to copy the result
+        let btn = document.querySelector('.submitbtn');
+        btn.addEventListener('click', copyResultToClipboard);
+    
+        document.addEventListener('keydown', function (event) {
             // Check if the "R" key was pressed (case-insensitive)
             if (event.key.toLowerCase() === 'r') {
                 // Execute a function when "R" key is pressed
                 executeFunctionOnRKeyPress();
             }
-            });
-
-            // Function to copy the result to clipboard
-            function copyResultToClipboard() {
-                let txt = document.querySelector('.display');
-                txt.select();
-                document.execCommand('copy');
-            }
-
-            // Add a click event listener to the button to copy the result
-            let btn = document.querySelector('.submitbtn');
-            btn.addEventListener('click', copyResultToClipboard);
         });
+    
+        // Function to execute when "R" key is pressed
         function executeFunctionOnRKeyPress() {
             // Get a reference to the "display" input element
             const displayInput = document.getElementById('display');
             const limit = document.getElementById('Limit');
             const Time = document.getElementById('Time');
             const Send_Limit = document.getElementById('Send_Limit');
-
+    
             // Perform the desired action on the input element
             displayInput.value = '';
             limit.value = '';
