@@ -60,15 +60,15 @@
             const timeInput = document.getElementById('Time');
             const sendLimitInput = document.getElementById('Send_Limit');
             const submitBtn = document.querySelector('.submitbtn');
-    
+
             form.addEventListener('submit', function (e) {
                 e.preventDefault(); // Prevent the form from actually submitting
-    
+
                 // Get values from input fields
                 const limit = parseFloat(limitInput.value);
                 const time = parseFloat(timeInput.value);
                 const sendLimit = parseFloat(sendLimitInput.value);
-    
+
                 // Calculate the result
                 if (isNaN(limit)) {
                     // Display an error message in the "display" input field
@@ -76,27 +76,29 @@
                 } else {
                     // Calculate the result
                     const result = 3600 / ((limit / time) / sendLimit);
-    
+
                     // Display the result in the "display" input field
                     displayInput.value = Math.round(result);
+
+                    // Handle Enter key press to copy the result
+                    displayInput.addEventListener('keyup', function (event) {
+                        if (event.key === 'Enter') {
+                            copyResultToClipboard();
+                        }
+                    });
+
+                    // Function to copy the result to clipboard
+                    function copyResultToClipboard() {
+                        displayInput.select();
+                        document.execCommand('copy');
+                    }
+
+                    // Add a click event listener to the button to copy the result
+                    submitBtn.addEventListener('click', copyResultToClipboard)
                 }
             });
-    
-            // Handle Enter key press to copy the result
-            displayInput.addEventListener('keyup', function (event) {
-                if (event.key === 'Enter') {
-                    copyResultToClipboard();
-                }
-            });
-    
-            // Function to copy the result to clipboard
-            function copyResultToClipboard() {
-                displayInput.select();
-                document.execCommand('copy');
-            }
-    
-            // Add a click event listener to the button to copy the result
-            submitBtn.addEventListener('click', copyResultToClipboard)
+
+
             // Event listener for the "R" key press
             document.addEventListener('keydown', function (event) {
                 // Check if the "R" key was pressed (case-insensitive)
@@ -105,7 +107,7 @@
                     executeFunctionOnRKeyPress();
                 }
             });
-    
+
             // Function to execute when "R" key is pressed
             function executeFunctionOnRKeyPress() {
                 displayInput.value = '';
